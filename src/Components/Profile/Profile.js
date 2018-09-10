@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { getUser } from './../../ducks/reducer';
+import { getUser, getUserResults } from './../../ducks/reducer';
 import Modal from 'react-responsive-modal';
-import Charts from './../Charts/Charts';
+// import Charts from './../Charts/Charts';
 
 class Profile extends Component {
 	constructor() {
@@ -16,15 +15,6 @@ class Profile extends Component {
 		};
 	}
 
-	componentDidMount() {
-        // get username, userImg, tipOfDay, wpmHist, accHist
-		if (!this.props.user.user_id) {
-			axios
-				.get('/api/user-data')
-				.then((userOnSesh) => this.props.getUser(userOnSesh.data))
-				.catch((error) => console.log('Oi! Somethings gone wrong!', error));
-        }
-    }
     componentWillReceiveProps(nextProps){
         this.setState({open: nextProps.show})
     }
@@ -35,6 +25,13 @@ class Profile extends Component {
 	};
 
 	render() {
+		let tests = this.props.userTestResults;
+		let WPMArray = [];
+		let ACCArray =[];
+		if(tests.length){
+			WPMArray.push(tests[0].wpm)
+			ACCArray.push(tests[0].accuracy)
+		}
 		return (
 			<Modal open={this.state.open} onClose={this.hideProfileModal} className={{ modal: 'custom-modal' }} center>
 				<div className="profile-userInfo">
@@ -43,12 +40,11 @@ class Profile extends Component {
 				</div>
 
 				<div className="profile-graphs">
-					<div><Charts /></div>
+					{/* <div><Charts WPMArray={WPMArray} ACCArray={ACCArray}/></div> */}
 				</div>
 
 				<div className="profile-tips">
-					<h3>Tip Of The Day</h3>
-					{this.state.tipOfDay}
+					<h3>Tip Of The Day: {this.state.tipOfDay}</h3>
 				</div>
 			</Modal>
 		);
@@ -56,8 +52,9 @@ class Profile extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		user: state.user
+		user: state.user,
+		userTestResults: state.results
 	};
 };
 
-export default connect(mapStateToProps, { getUser })(Profile);
+export default connect(mapStateToProps, { getUser, getUserResults})(Profile);

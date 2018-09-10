@@ -26,9 +26,6 @@ class SideNav extends Component {
 				this.setState({ leaderBoardRes: testResults.data });
 			})
 			.catch((error) => console.log('Oi! Somethings gone wrong!', error));
-		if (!this.props.user.user_id) {
-			axios.get('/api/user-data').then((userOnSesh) => this.props.getUser(userOnSesh.data));
-		}
 	};
 	handleUsernameChange = (val) => {
 		this.setState({ username: val });
@@ -209,7 +206,6 @@ class SideNav extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		testResults: state.results,
 		user: state.user
 	};
 };
