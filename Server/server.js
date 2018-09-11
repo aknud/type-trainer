@@ -12,17 +12,19 @@ app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const { SERVER_PORT, DATABASE_URL, SESSION_SECRET } = process.env;
 
 app.use(
-	session({
+    session({
+        store: new (require('connect-pg-simple')(session))(),
 		secret: SESSION_SECRET,
 		resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }//30 days
 	})
 );
 
-massive(CONNECTION_STRING).then((db) => {
+massive(DATABASE_URL).then((db) => {
 	app.set('db', db);
 	console.log('Database reporting for duty');
 });
