@@ -5,11 +5,10 @@ const bodyParser = require('body-parser');
 const massive = require('massive');
 const ctrl = require('./server-controllers');
 const mid = require('./middleware');
-const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname + '/../build'));
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 
@@ -19,7 +18,7 @@ app.use(
 	session({
 		secret: SESSION_SECRET,
 		resave: false,
-		saveUninitialized: true
+        saveUninitialized: true
 	})
 );
 
@@ -46,9 +45,5 @@ app.get('/api/all-results', ctrl.getAllResults);
 app.get('/api/get-snippet/:id', ctrl.getSnippet);
 
 app.post('/api/update-user-metrics', ctrl.updateUserMetrics);
-
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));
