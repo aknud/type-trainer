@@ -47,4 +47,8 @@ app.get('/api/get-snippet/:id', ctrl.getSnippet);
 
 app.post('/api/update-user-metrics', ctrl.updateUserMetrics);
 
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));
