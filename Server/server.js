@@ -8,19 +8,19 @@ const mid = require('./middleware');
 
 const app = express();
 
-app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 
 app.use(bodyParser.json());
 
 const { SERVER_PORT, DATABASE_URL, SESSION_SECRET } = process.env;
 
 app.use(
-    session({
-        store: new (require('connect-pg-simple')(session))(),
+	session({
+		store: new (require('connect-pg-simple')(session))(),
 		secret: SESSION_SECRET,
 		resave: false,
-        saveUninitialized: true,
-        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }//30 days
+		saveUninitialized: true,
+		cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } //30 days
 	})
 );
 

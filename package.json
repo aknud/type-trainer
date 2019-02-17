@@ -3,32 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "main": "./server/server.js",
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3456"
-    }
-  },
+  "proxy": "http://localhost:3456",
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.7.3",
     "connect-pg-simple": "^5.0.0",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "massive": "^5.2.0",
-    "react": "^16.4.2",
-    "react-burger-menu": "^2.5.2",
+    "massive": "^5.7.5",
+    "react": "^16.8.2",
+    "react-burger-menu": "^2.6.5",
     "react-chartjs-2": "^2.7.4",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.8.2",
     "react-motion": "^0.5.2",
-    "react-redux": "^5.0.7",
-    "react-responsive-modal": "^3.2.0",
-    "react-scripts": "1.1.4",
-    "react-test-renderer": "^16.5.0",
-    "redux": "^4.0.0",
-    "sweetalert": "^2.1.0"
+    "react-redux": "^5.1.1",
+    "react-responsive-modal": "^3.6.0",
+    "react-scripts": "^2.1.5",
+    "react-test-renderer": "^16.8.2",
+    "redux": "^4.0.1",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,8 +34,8 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "devDependencies": {
-    "cypress": "^3.1.0",
-    "jest": "^23.5.0"
+    "cypress": "^3.1.5",
+    "jest": "^23.6.0"
   },
   "jest": {
     "testEnvironment": "node"
@@ -53,5 +49,11 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/antiadp/type-trainer/issues"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

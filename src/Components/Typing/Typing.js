@@ -70,8 +70,6 @@ class Typing extends Component {
 			this.clearMe();
 		}
 		if (prevState.language !== this.state.language) {
-			console.log('language', this.state.language);
-
 			this.clearMe();
 		}
 	}
